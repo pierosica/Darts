@@ -19,41 +19,36 @@ import java.awt.event.ActionListener;
 
 @SuppressWarnings({ "serial", "unused" })
 public class PlayerPanel extends JPanel {
-	
+
 	private JPanel contentPane;
 	public JTextField txtName;
-	private static int NumeroRighe=2;
+	private static int NumeroRighe = 21;
 	private CompositeRow riga;
-//	public CompositeRow riga2;
-//	public CompositeRow riga3;
 	public JLabel lblPunteggioPlayer;
 	public int IDpannello;
-	
+
 	public CompositeRow[] rowArray = new CompositeRow[NumeroRighe];
 
-	Border borderTxtName = new EtchedBorder(EtchedBorder.LOWERED,
-			null, null);
-	
-	
+	Border borderTxtName = new EtchedBorder(EtchedBorder.LOWERED, null, null);
 
 	/**
 	 * Create the panel.
 	 */
 	public PlayerPanel(int id) {
-//		setAlignmentY(0.0f);
-//		setAlignmentX(0.0f);
-//		setBounds(new Rectangle(0, 0, 150, 485));
-//		this.setLayout(null);
+		// setAlignmentY(0.0f);
+		// setAlignmentX(0.0f);
+		// setBounds(new Rectangle(0, 0, 150, 485));
+		// this.setLayout(null);
 
-		this.IDpannello=id;
-		
+		this.IDpannello = id;
+
 		JPanel pnlPlayer = new JPanel();
 		pnlPlayer.setBounds(0, 0, 190, 480);
-		//pnlPlayer.setBackground(Color.GRAY);
+		// pnlPlayer.setBackground(Color.GRAY);
 		pnlPlayer.setBorder(borderTxtName);
 		pnlPlayer.setLayout(null);
 		add(pnlPlayer);
-		
+
 		// Player TextName
 		txtName = new JTextField();
 		txtName.setBounds(5, 12, 180, 34);
@@ -63,30 +58,27 @@ public class PlayerPanel extends JPanel {
 		txtName.setBorder(borderTxtName);
 		pnlPlayer.add(txtName);
 
-
 		// Player lblPunteggio
 		lblPunteggioPlayer = new JLabel("0");
 		lblPunteggioPlayer.setBounds(5, 42, 180, 34);
 		lblPunteggioPlayer.setBorder(borderTxtName);
 		lblPunteggioPlayer.setFont(new Font("Dialog", Font.BOLD, 16));
 		lblPunteggioPlayer.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPunteggioPlayer
-				.setToolTipText("Punteggio " + txtName.getText());
+		lblPunteggioPlayer.setToolTipText("Punteggio " + txtName.getText());
 		pnlPlayer.add(lblPunteggioPlayer);
-		
-		int width=180;
-		int height=30;
+
+		int width = 180;
+		int height = 30;
 		// aggiungo le CompositeRow
-		for (int i=0; i<NumeroRighe; i++) {
+		for (int i = 0; i < NumeroRighe; i++) {
 			riga = new CompositeRow(this.IDpannello, i);
-			riga.setBounds(5, 85 + (height+5) *i, width, height);
-			rowArray[i]=riga;
-			pnlPlayer.add(riga);			
+			riga.setBounds(5, 85 + (height + 5) * i, width, height);
+			rowArray[i] = riga;
+			pnlPlayer.add(riga);
 		}
-		
-		
-		//riga1.setBounds(12, 155, 150, 25);
-		
+
+		// riga1.setBounds(12, 155, 150, 25);
+
 	}
-	
+
 }
