@@ -92,28 +92,22 @@ public class DartMain extends JFrame {
 		return fullRed;
 	}
 
-	// public static void click(int pannello, int riga){
-	// Color rosso = new Color(255, 51, 0);
-	// Color blue = new Color (0,0,255);
-	// Color grigio = (Color.LIGHT_GRAY);
-	//
-	// }
-
 	public static void buildIt(int giocatori) {
 		contentPanePlayer.removeAll();
 		contentPanePlayer.repaint();
 		panelArray = new PlayerPanel[giocatori];
 		fullRedArray = new boolean[21];
 		int width = 190;
-		int height = 500;
+		int height = 550;
 		PlayerPanel pnlPlayer;
 		for (int i = 0; i < giocatori; i++) {
 			pnlPlayer = new PlayerPanel(i);
-			pnlPlayer.setBounds((width + 5) * i, 30, width, height);
+			pnlPlayer.setBounds((width + 5) * i, 5, width, height);
 			pnlPlayer.setLayout(null);
 			panelArray[i] = pnlPlayer;
 			contentPanePlayer.add(pnlPlayer);
 		}
+
 	}
 
 	/**

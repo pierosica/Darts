@@ -31,33 +31,33 @@ public class CompositeRow extends JPanel {
 			null, null);
 	private Border borderBtnNumero = new EtchedBorder(EtchedBorder.RAISED,
 			null, null);
-	private Border borderCompositeRow = new EtchedBorder(EtchedBorder.LOWERED,
-			null, null);
+//	private Border borderCompositeRow = new EtchedBorder(EtchedBorder.LOWERED,
+//			null, null);
 
 	// metodo di creazione della CompositeRow
 	public CompositeRow(final int idpannello, final int idriga) {
 		this.setLayout(null);
-		this.setBorder(borderCompositeRow);
+		//this.setBorder(borderCompositeRow);
 
 		// creo le JLabel dei Numeri
 		lblNumeroA = new ExtJLabel();
 		lblNumeroA.setBorder(borderLblNumero);
-		lblNumeroA.setBounds(60, 2, 30, 25);
+		lblNumeroA.setBounds(60, 2, 25, 15);
 		this.add(lblNumeroA);
 
 		lblNumeroB = new ExtJLabel();
 		lblNumeroB.setBorder(borderLblNumero);
-		lblNumeroB.setBounds(105, 2, 30, 25);
+		lblNumeroB.setBounds(105, 2, 25, 15);
 		this.add(lblNumeroB);
 
 		lblNumeroC = new ExtJLabel();
 		lblNumeroC.setBorder(borderLblNumero);
-		lblNumeroC.setBounds(145, 2, 30, 25);
+		lblNumeroC.setBounds(145, 2, 25, 15);
 		this.add(lblNumeroC);
 
 		// creo il Bottone del Numero
 		final JButton btnNumero = new JButton(idriga + 1 + "");
-		btnNumero.setBounds(5, 2, 34, 25);
+		btnNumero.setBounds(5, 2, 25, 15);
 		this.add(btnNumero);
 		btnNumero.setMargin(new Insets(2, 2, 2, 2));
 		btnNumero.setFont(new Font("Dialog", Font.BOLD, 12));

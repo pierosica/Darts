@@ -27,7 +27,6 @@ public class IntestazionePanel extends JPanel {
 	private final static ButtonGroup buttonGroup = new ButtonGroup();
 	private int selectedVal = 2;
 	private static JOptionPane jOptionPaneConferma = new JOptionPane();
-	// private JDialog conferma;
 	private Border borderIntestazione = new EtchedBorder(EtchedBorder.LOWERED,
 			null, null);
 
@@ -79,19 +78,7 @@ public class IntestazionePanel extends JPanel {
 		});
 		
 		add(pnlIntestazione);
-
-
-		// conferma = new JDialog((Frame) this.getParent(), true);
-		//
-		// conferma.setBounds(600, 350, 300, 100);
-		// conferma.getContentPane().setLayout(null);
-		// conferma.getContentPane().add(
-		// new JLabel("Chiudi questa finestra per continuare",
-		// JLabel.CENTER));
-		// conferma.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		//
-
-
+		
 	}
 
 	public void jOptionPanelConferma() {

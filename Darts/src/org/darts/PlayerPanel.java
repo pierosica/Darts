@@ -13,9 +13,16 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
+
+import org.jdesktop.xswingx.PromptSupport;
+
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 @SuppressWarnings({ "serial", "unused" })
 public class PlayerPanel extends JPanel {
@@ -43,7 +50,7 @@ public class PlayerPanel extends JPanel {
 		this.IDpannello = id;
 
 		JPanel pnlPlayer = new JPanel();
-		pnlPlayer.setBounds(0, 0, 190, 480);
+		pnlPlayer.setBounds(0, 0, 190, 510);
 		// pnlPlayer.setBackground(Color.GRAY);
 		pnlPlayer.setBorder(borderTxtName);
 		pnlPlayer.setLayout(null);
@@ -54,9 +61,11 @@ public class PlayerPanel extends JPanel {
 		txtName.setBounds(5, 12, 180, 34);
 		txtName.setToolTipText("Nome del primo giocatore");
 		txtName.setColumns(10);
-		txtName.setText("Unknown name");
 		txtName.setBorder(borderTxtName);
+		// sono serviti i jar esterni di xswingx per fare questo qui sotto...
+		PromptSupport.setPrompt("Nome Giocatore", txtName);
 		pnlPlayer.add(txtName);
+		
 
 		// Player lblPunteggio
 		lblPunteggioPlayer = new JLabel("0");
@@ -66,18 +75,18 @@ public class PlayerPanel extends JPanel {
 		lblPunteggioPlayer.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPunteggioPlayer.setToolTipText("Punteggio " + txtName.getText());
 		pnlPlayer.add(lblPunteggioPlayer);
+		
 
-		int width = 180;
-		int height = 30;
+		
 		// aggiungo le CompositeRow
+		int width = 180;
+		int height = 20;
 		for (int i = 0; i < NumeroRighe; i++) {
 			riga = new CompositeRow(this.IDpannello, i);
-			riga.setBounds(5, 85 + (height + 5) * i, width, height);
+			riga.setBounds(5, 80 + (height + 0) * i, width, height);
 			rowArray[i] = riga;
 			pnlPlayer.add(riga);
 		}
-
-		// riga1.setBounds(12, 155, 150, 25);
 
 	}
 
