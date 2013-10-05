@@ -2,6 +2,8 @@ package org.darts;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Window;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -78,6 +80,27 @@ public class DartMain extends JFrame {
 
 		}
 	}
+	
+	public static void riCambiaColore (int pannello, int riga) {
+		fullRedArray[riga] = true;
+
+		int numeroGiocatori = intestazionepanel.getSelectedVal();
+		Color rosso = new Color(255, 0, 0);
+		for (int i = 0; i < numeroGiocatori; i++) {
+			PlayerPanel otherpanel = panelArray[i];
+			CompositeRow otherrow = otherpanel.rowArray[riga];
+
+			ExtJLabel lblNumeroA = otherrow.lblNumeroA;
+			lblNumeroA.setColoured(rosso);
+			ExtJLabel lblNumeroB = otherrow.lblNumeroB;
+			lblNumeroB.setColoured(rosso);
+			ExtJLabel lblNumeroC = otherrow.lblNumeroC;
+			lblNumeroC.setColoured(rosso);
+
+		}
+		
+		
+	}
 
 	public static boolean numeroMorto(int riga) {
 		int numeroGiocatori = intestazionepanel.getSelectedVal();
@@ -106,6 +129,7 @@ public class DartMain extends JFrame {
 			pnlPlayer.setLayout(null);
 			panelArray[i] = pnlPlayer;
 			contentPanePlayer.add(pnlPlayer);
+
 		}
 
 	}
@@ -119,7 +143,7 @@ public class DartMain extends JFrame {
 		// imposto la window del programma
 		setTitle("Darts");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 600);
+		setBounds(300, 300, 800, 600);
 
 		// creo il contentPane
 		contentPane = new JPanel();

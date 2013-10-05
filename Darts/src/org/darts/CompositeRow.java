@@ -18,7 +18,7 @@ public class CompositeRow extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	// public int IDriga;
-	public JButton bottone;
+	// public JButton bottone;
 	public boolean tuttiRossi = false;
 	public ExtJLabel lblNumeroA;
 	public ExtJLabel lblNumeroB;
@@ -42,17 +42,17 @@ public class CompositeRow extends JPanel {
 		// creo le JLabel dei Numeri
 		lblNumeroA = new ExtJLabel();
 		lblNumeroA.setBorder(borderLblNumero);
-		lblNumeroA.setBounds(60, 2, 25, 15);
+		lblNumeroA.setBounds(40, 2, 25, 15);
 		this.add(lblNumeroA);
 
 		lblNumeroB = new ExtJLabel();
 		lblNumeroB.setBorder(borderLblNumero);
-		lblNumeroB.setBounds(105, 2, 25, 15);
+		lblNumeroB.setBounds(80, 2, 25, 15);
 		this.add(lblNumeroB);
 
 		lblNumeroC = new ExtJLabel();
 		lblNumeroC.setBorder(borderLblNumero);
-		lblNumeroC.setBounds(145, 2, 25, 15);
+		lblNumeroC.setBounds(120, 2, 25, 15);
 		this.add(lblNumeroC);
 
 		// creo il Bottone del Numero
@@ -87,6 +87,28 @@ public class CompositeRow extends JPanel {
 						}
 					}
 				}
+			}
+		});
+		
+		// creo il Bottone ANNULLA Numero
+		final JButton btnAnnullaNumero = new JButton(idriga + 1 + "");
+		btnAnnullaNumero.setBounds(150, 2, 25, 15);
+		this.add(btnAnnullaNumero);
+		btnAnnullaNumero.setMargin(new Insets(2, 2, 2, 2));
+		btnAnnullaNumero.setFont(new Font("Dialog", Font.BOLD, 12));
+		btnAnnullaNumero.setBorder(borderBtnNumero);
+		btnAnnullaNumero.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent f) {
+				Color grigio = new Color(255, 51, 0);
+
+				if (lblNumeroC.isColored()) {
+					lblNumeroC.setColoured(grigio);
+					tuttiRossi = false;
+
+				}
+				
 			}
 		});
 	}
