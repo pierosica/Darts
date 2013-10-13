@@ -1,6 +1,5 @@
 package org.darts;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -19,7 +18,8 @@ public class CompositeRow extends JPanel {
 	private static final long serialVersionUID = 1L;
 	// public int IDriga;
 	// public JButton bottone;
-	public boolean tuttiRossi = false;
+	public boolean pnlChiuso;
+	private boolean pnlMorto;
 	public ExtJLabel lblNumeroA;
 	public ExtJLabel lblNumeroB;
 	public ExtJLabel lblNumeroC;
@@ -31,31 +31,38 @@ public class CompositeRow extends JPanel {
 			null, null);
 	private Border borderBtnNumero = new EtchedBorder(EtchedBorder.RAISED,
 			null, null);
-//	private Border borderCompositeRow = new EtchedBorder(EtchedBorder.LOWERED,
-//			null, null);
+
+	// private Border borderCompositeRow = new
+	// EtchedBorder(EtchedBorder.LOWERED,
+	// null, null);
 
 	// metodo di creazione della CompositeRow
 	public CompositeRow(final int idpannello, final int idriga) {
 		this.setLayout(null);
-		//this.setBorder(borderCompositeRow);
+		// this.setBorder(borderCompositeRow);
 
 		// creo le JLabel dei Numeri
 		lblNumeroA = new ExtJLabel();
 		lblNumeroA.setBorder(borderLblNumero);
 		lblNumeroA.setBounds(40, 2, 25, 15);
+		lblNumeroA.setColoured(lblNumeroA.getColor());
 		this.add(lblNumeroA);
 
 		lblNumeroB = new ExtJLabel();
 		lblNumeroB.setBorder(borderLblNumero);
 		lblNumeroB.setBounds(80, 2, 25, 15);
+		lblNumeroB.setColoured(lblNumeroB.getColor());
 		this.add(lblNumeroB);
 
 		lblNumeroC = new ExtJLabel();
 		lblNumeroC.setBorder(borderLblNumero);
 		lblNumeroC.setBounds(120, 2, 25, 15);
+		lblNumeroC.setColoured(lblNumeroC.getColor());
 		this.add(lblNumeroC);
 
-		// creo il Bottone del Numero
+		/*
+		 * creo il Bottone del Numero
+		 */
 		final JButton btnNumero = new JButton(idriga + 1 + "");
 		btnNumero.setBounds(5, 2, 25, 15);
 		this.add(btnNumero);
@@ -66,31 +73,36 @@ public class CompositeRow extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Color rosso = new Color(255, 51, 0);
-
-				if (tuttiRossi) {
+				if (pnlChiuso | pnlMorto) {
 					DartMain.incrementa(idpannello, idriga);
-				}
-				if (!lblNumeroA.isColored()) {
-					lblNumeroA.setColoured(rosso);
 				} else {
-					if (!lblNumeroB.isColored()) {
-						lblNumeroB.setColoured(rosso);
+					if (!lblNumeroA.isLblPreso()) {
+						lblNumeroA.setLblPreso(true);
+						pnlChiuso = false;
 					} else {
-						if (!lblNumeroC.isColored()) {
-							lblNumeroC.setColoured(rosso);
-							tuttiRossi = true;
-							boolean morto = DartMain.numeroMorto(idriga);
-							if (morto) {
-								DartMain.cambiaColore(idpannello, idriga);
+						if (!lblNumeroB.isLblPreso()) {
+							lblNumeroB.setLblPreso(true);
+							pnlChiuso = false;
+						} else {
+							if (!lblNumeroC.isLblPreso()) {
+								lblNumeroC.setLblPreso(true);
+								pnlChiuso = true;
+								pnlMorto = DartMain.isNumeroMorto(idriga);
+								if (pnlMorto) {
+									DartMain.cambiaColoreMorto(idpannello,
+											idriga);
+
+								}
 							}
 						}
 					}
 				}
 			}
 		});
-		
-		// creo il Bottone ANNULLA Numero
+
+		/*
+		 * creo il Bottone ANNULLA Numero
+		 */
 		final JButton btnAnnullaNumero = new JButton(idriga + 1 + "");
 		btnAnnullaNumero.setBounds(150, 2, 25, 15);
 		this.add(btnAnnullaNumero);
@@ -101,16 +113,36 @@ public class CompositeRow extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent f) {
-				Color grigio = new Color(255, 51, 0);
+				pnlMorto = DartMain.isNumeroMorto(idriga);
+				System.out.println(pnlMorto);
 
-				if (lblNumeroC.isColored()) {
-					lblNumeroC.setColoured(grigio);
-					tuttiRossi = false;
+				if (pnlMorto) {
+					pnlChiuso = false;
+					pnlMorto = false;
+					DartMain.cambiaColoreChiuso(idpannello, idriga);
+					// lblNumeroC.setLblPreso(false);
 
+					// DartMain.cambiaColoreChiuso(idpannello, idriga);
 				}
-				
+				if (pnlChiuso) {
+					pnlChiuso = false;
+				}
+				if (lblNumeroC.isLblPreso() & lblNumeroB.isLblPreso()
+						& lblNumeroA.isLblPreso()) {
+					lblNumeroC.setLblPreso(false);
+					pnlChiuso = false;
+				} else {
+					if (lblNumeroB.isLblPreso() & lblNumeroA.isLblPreso()) {
+						lblNumeroB.setLblPreso(false);
+						pnlChiuso = false;
+					} else {
+						if (lblNumeroA.isLblPreso()) {
+							lblNumeroA.setLblPreso(false);
+							pnlChiuso = false;
+						}
+					}
+				}
 			}
 		});
 	}
-
 }

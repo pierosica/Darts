@@ -32,6 +32,8 @@ public class PlayerPanel extends JPanel {
 	private static int NumeroRighe = 21;
 	private CompositeRow riga;
 	public JLabel lblPunteggioPlayer;
+	private JButton btnMenoUno;
+	private JButton btnMenoDieci;
 	public int IDpannello;
 
 	public CompositeRow[] rowArray = new CompositeRow[NumeroRighe];
@@ -65,19 +67,55 @@ public class PlayerPanel extends JPanel {
 		// sono serviti i jar esterni di xswingx per fare questo qui sotto...
 		PromptSupport.setPrompt("Nome Giocatore", txtName);
 		pnlPlayer.add(txtName);
-		
 
 		// Player lblPunteggio
 		lblPunteggioPlayer = new JLabel("0");
-		lblPunteggioPlayer.setBounds(5, 42, 180, 34);
+		lblPunteggioPlayer.setBounds(5, 42, 160, 34);
 		lblPunteggioPlayer.setBorder(borderTxtName);
 		lblPunteggioPlayer.setFont(new Font("Dialog", Font.BOLD, 16));
 		lblPunteggioPlayer.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPunteggioPlayer.setToolTipText("Punteggio " + txtName.getText());
 		pnlPlayer.add(lblPunteggioPlayer);
-		
+		/*
+		 * Pulsanti di correzione punteggio '-1' e '-10'
+		 */
+		btnMenoUno = new JButton();
+		btnMenoUno.setBounds(166, 44, 15, 15);
+		btnMenoUno.setMargin(new Insets(2, 2, 2, 2));
+		btnMenoUno.setFont(new Font("Dialog", Font.BOLD, 12));
+		btnMenoUno.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
+		btnMenoUno.addActionListener(new ActionListener() {
 
-		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// PlayerPanel mypanel = panelArray[pannello];
+				int totale = Integer.parseInt(lblPunteggioPlayer.getText()
+						.toString()) - 1;
+				lblPunteggioPlayer.setText("" + totale);
+			}
+
+		});
+		pnlPlayer.add(btnMenoUno);
+
+		btnMenoDieci = new JButton();
+		btnMenoDieci.setBounds(166, 60, 15, 15);
+		btnMenoDieci.setMargin(new Insets(2, 2, 2, 2));
+		btnMenoDieci.setFont(new Font("Dialog", Font.BOLD, 12));
+		btnMenoDieci
+				.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
+		btnMenoDieci.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// PlayerPanel mypanel = panelArray[pannello];
+				int totale = Integer.parseInt(lblPunteggioPlayer.getText()
+						.toString()) - 10;
+				lblPunteggioPlayer.setText("" + totale);
+			}
+
+		});
+		pnlPlayer.add(btnMenoDieci);
+
 		// aggiungo le CompositeRow
 		int width = 180;
 		int height = 20;
