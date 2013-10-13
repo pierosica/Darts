@@ -1,5 +1,6 @@
 package org.darts;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -12,34 +13,22 @@ import javax.swing.border.EtchedBorder;
 
 public class CompositeRow extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	// public int IDriga;
-	// public JButton bottone;
 	public boolean pnlChiuso;
 	private boolean pnlMorto;
+	private Color nero = new Color(0,0,0); 
+	private Color bianco = new Color(255,255, 255); 
 	public ExtJLabel lblNumeroA;
 	public ExtJLabel lblNumeroB;
 	public ExtJLabel lblNumeroC;
-
-	// private int IDpannello;
-
-	// imposto i BORDI dei vari elementi
 	private Border borderLblNumero = new EtchedBorder(EtchedBorder.RAISED,
 			null, null);
 	private Border borderBtnNumero = new EtchedBorder(EtchedBorder.RAISED,
 			null, null);
 
-	// private Border borderCompositeRow = new
-	// EtchedBorder(EtchedBorder.LOWERED,
-	// null, null);
-
 	// metodo di creazione della CompositeRow
 	public CompositeRow(final int idpannello, final int idriga) {
 		this.setLayout(null);
-		// this.setBorder(borderCompositeRow);
 
 		// creo le JLabel dei Numeri
 		lblNumeroA = new ExtJLabel();
@@ -63,11 +52,16 @@ public class CompositeRow extends JPanel {
 		/*
 		 * creo il Bottone del Numero
 		 */
-		final JButton btnNumero = new JButton(idriga + 1 + "");
+		String btnLabel = (idriga + 1 + "");
+		if (idriga==20) {
+			btnLabel = "Bull";
+		}
+//		final JButton btnNumero = new JButton(idriga + 1 + "");
+		final JButton btnNumero = new JButton(btnLabel);
 		btnNumero.setBounds(5, 2, 25, 15);
 		this.add(btnNumero);
 		btnNumero.setMargin(new Insets(2, 2, 2, 2));
-		btnNumero.setFont(new Font("Dialog", Font.BOLD, 12));
+		btnNumero.setFont(new Font("Dialog", Font.BOLD, 10));
 		btnNumero.setBorder(borderBtnNumero);
 		btnNumero.addActionListener(new ActionListener() {
 
@@ -91,7 +85,6 @@ public class CompositeRow extends JPanel {
 								if (pnlMorto) {
 									DartMain.cambiaColoreMorto(idpannello,
 											idriga);
-
 								}
 							}
 						}
@@ -103,18 +96,20 @@ public class CompositeRow extends JPanel {
 		/*
 		 * creo il Bottone ANNULLA Numero
 		 */
-		final JButton btnAnnullaNumero = new JButton(idriga + 1 + "");
-		btnAnnullaNumero.setBounds(150, 2, 25, 15);
+		final JButton btnAnnullaNumero = new JButton(btnLabel);
+		btnAnnullaNumero.setBounds(155, 5, 15, 9);
 		this.add(btnAnnullaNumero);
 		btnAnnullaNumero.setMargin(new Insets(2, 2, 2, 2));
-		btnAnnullaNumero.setFont(new Font("Dialog", Font.BOLD, 12));
+		btnAnnullaNumero.setFont(new Font("Dialog", Font.PLAIN, 7));
 		btnAnnullaNumero.setBorder(borderBtnNumero);
+		btnAnnullaNumero.setForeground(bianco);
+		btnAnnullaNumero.setBackground(nero);
 		btnAnnullaNumero.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent f) {
 				pnlMorto = DartMain.isNumeroMorto(idriga);
-				System.out.println(pnlMorto);
+				//System.out.println(pnlMorto);
 
 				if (pnlMorto) {
 					pnlChiuso = false;
