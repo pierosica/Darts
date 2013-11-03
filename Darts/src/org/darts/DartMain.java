@@ -1,6 +1,9 @@
 package org.darts;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,7 +17,9 @@ public class DartMain extends JFrame {
 	private static PlayerPanel[] panelArray;
 	private static boolean[] mortoArray;
 	private static IntestazionePanel intestazionepanel;
-
+	public static Giocatore[] giocatoriArray;
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -23,6 +28,8 @@ public class DartMain extends JFrame {
 			public void run() {
 				try {
 					DartMain frame = new DartMain();
+					frame.setLocationRelativeTo(null);
+					//frame.pack();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,10 +42,8 @@ public class DartMain extends JFrame {
 		boolean morto = true;
 		int numeroGiocatori = intestazionepanel.getSelectedVal();
 		int delta=1;
-		//System.out.println(riga);
 		if(riga==20){
 			delta = 5;
-			//System.out.println("qwe");
 		}
 
 		for (int i = 0; i < numeroGiocatori; i++) {
@@ -51,7 +56,6 @@ public class DartMain extends JFrame {
 							.getText().toString()) + riga + delta;
 					otherpanel.lblPunteggioPlayer.setText("" + totale);
 				}
-
 			}
 		}
 		if (morto) {
@@ -121,6 +125,26 @@ public class DartMain extends JFrame {
 		return morto;
 	}
 
+	/*
+	 *  TODO
+	 */
+	public static void vincitore (){
+		int numeroGiocatori = intestazionepanel.getSelectedVal();
+		for (int i = 0; i < numeroGiocatori; i++) {
+//			if (i != pannello) {
+//				PlayerPanel otherpanel = panelArray[i];
+//				CompositeRow otherrow = otherpanel.rowArray[riga];
+//				morto = morto & otherrow.pnlChiuso;
+//				if (!otherrow.pnlChiuso) {
+//					int totale = Integer.parseInt(otherpanel.lblPunteggioPlayer
+//							.getText().toString()) + riga + delta;
+//					otherpanel.lblPunteggioPlayer.setText("" + totale);
+//				}
+//
+//			}
+		}
+	}
+
 	public static void buildIt(int giocatori) {
 		contentPanePlayer.removeAll();
 		contentPanePlayer.repaint();
@@ -133,7 +157,19 @@ public class DartMain extends JFrame {
 			pnlPlayer = new PlayerPanel(i);
 			pnlPlayer.setBounds((width + 5) * i, 5, width, height);
 			pnlPlayer.setLayout(null);
+//			if (giocatoriArray[i]!=null) {
+//				if (giocatoriArray[i].getNome()!="") {
+//					giocatoriArray[i]=giocatoriArray[i];	
+//					pnlPlayer.txtName.setText(giocatoriArray[i].getNome());
+//				}
+//				
+//				
+//			} else {
+//				giocatoriArray[i]=new Giocatore("");
+//			}
+			
 			panelArray[i] = pnlPlayer;
+			//contentPanePlayer.setBackground(new Color(255,0,0));
 			contentPanePlayer.add(pnlPlayer);
 		}
 	}
@@ -147,7 +183,18 @@ public class DartMain extends JFrame {
 		// imposto la window del programma
 		setTitle("Darts");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(300, 300, 800, 600);
+//		setBounds(300, 300, 800, 600);
+		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+		int larghezzaMonitor = gd.getDisplayMode().getWidth();
+		int altezzaMonitor = gd.getDisplayMode().getHeight();
+//		Dimension screen = getToolkit().getScreenSize();
+//		int larghezzaMonitor = screen.width;
+//		int altezzaMonitor = screen.height;
+		int larghezzaFrame = 800;
+		int altezzaFrame = 600;
+		int posX=(larghezzaMonitor - larghezzaFrame)/2;
+		int posY=(altezzaMonitor - altezzaFrame)/2;
+		setBounds(posX, posY, larghezzaFrame, altezzaFrame);
 
 		// creo il contentPane
 		contentPane = new JPanel();
@@ -157,9 +204,10 @@ public class DartMain extends JFrame {
 
 		// aggancio il panel della intestazione
 		intestazionepanel = new IntestazionePanel();
-		intestazionepanel.setBounds(182, 0, 433, 47);
+		intestazionepanel.setBounds(124, 0, 550, 47);
 		contentPane.add(intestazionepanel);
 		int numeroGiocatori = intestazionepanel.getSelectedVal();
+		giocatoriArray= new Giocatore[numeroGiocatori];
 
 		contentPanePlayer = new JPanel();
 		contentPanePlayer.setBorder(new EmptyBorder(5, 5, 5, 5));
