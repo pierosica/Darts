@@ -64,7 +64,6 @@ public class CompositeRow extends JPanel {
 		btnNumero.setFont(new Font("Dialog", Font.BOLD, 10));
 		btnNumero.setBorder(borderBtnNumero);
 		btnNumero.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (pnlChiuso | pnlMorto) {

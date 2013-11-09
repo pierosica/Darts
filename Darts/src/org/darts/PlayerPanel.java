@@ -12,8 +12,6 @@ import javax.swing.border.EtchedBorder;
 import org.jdesktop.xswingx.PromptSupport;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 
 public class PlayerPanel extends JPanel {
 
@@ -21,8 +19,6 @@ public class PlayerPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//private JPanel contentPane;
-	public Giocatore player=new Giocatore("");
 	public static JTextField txtName;
 	public JLabel lblPunteggioPlayer;
 	private JButton btnMenoUno;
@@ -37,16 +33,10 @@ public class PlayerPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public PlayerPanel(int id) {
-		// setAlignmentY(0.0f);
-		// setAlignmentX(0.0f);
-		// setBounds(new Rectangle(0, 0, 150, 485));
-		// this.setLayout(null);
-
 		this.IDpannello = id;
 
 		JPanel pnlPlayer = new JPanel();
 		pnlPlayer.setBounds(0, 0, 190, 510);
-		// pnlPlayer.setBackground(Color.GRAY);
 		pnlPlayer.setBorder(borderTxtName);
 		pnlPlayer.setLayout(null);
 		add(pnlPlayer);
@@ -57,13 +47,6 @@ public class PlayerPanel extends JPanel {
 		txtName.setToolTipText("Nome del primo giocatore");
 		txtName.setColumns(10);
 		txtName.setBorder(borderTxtName);
-		txtName.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				Giocatore playerX=DartMain.giocatoriArray[IDpannello];
-				playerX.setNome(txtName.getText());
-			}
-		});
 		// sono serviti i jar esterni di xswingx per fare questo qui sotto...
 		PromptSupport.setPrompt("Nome Giocatore", txtName);
 		pnlPlayer.add(txtName);
@@ -85,10 +68,8 @@ public class PlayerPanel extends JPanel {
 		btnMenoUno.setFont(new Font("Dialog", Font.PLAIN, 7));
 		btnMenoUno.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		btnMenoUno.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// PlayerPanel mypanel = panelArray[pannello];
 				int totale = Integer.parseInt(lblPunteggioPlayer.getText()
 						.toString()) - 1;
 				lblPunteggioPlayer.setText("" + totale);
@@ -106,7 +87,6 @@ public class PlayerPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// PlayerPanel mypanel = panelArray[pannello];
 				int totale = Integer.parseInt(lblPunteggioPlayer.getText()
 						.toString()) - 10;
 				lblPunteggioPlayer.setText("" + totale);
@@ -124,5 +104,4 @@ public class PlayerPanel extends JPanel {
 			pnlPlayer.add(riga);
 		}
 	}
-
 }

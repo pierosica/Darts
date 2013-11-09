@@ -1,6 +1,5 @@
 package org.darts;
 
-import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
@@ -17,8 +16,6 @@ public class DartMain extends JFrame {
 	private static PlayerPanel[] panelArray;
 	private static boolean[] mortoArray;
 	private static IntestazionePanel intestazionepanel;
-	public static Giocatore[] giocatoriArray;
-	
 	
 	/**
 	 * Launch the application.
@@ -45,7 +42,6 @@ public class DartMain extends JFrame {
 		if(riga==20){
 			delta = 5;
 		}
-
 		for (int i = 0; i < numeroGiocatori; i++) {
 			if (i != pannello) {
 				PlayerPanel otherpanel = panelArray[i];
@@ -69,13 +65,8 @@ public class DartMain extends JFrame {
 	}
 
 	public static void cambiaColoreChiuso(int pannello, int riga) {
-		// se il btnAnnullaNumero e' premuto
-		// quando un numero è morto, fa tornare tutto rosso
-		// ..ci sara' poi un ulteriore controllo al click
-		// del btnAnnullaNumero che si occupa delle labels
 		int numeroGiocatori = intestazionepanel.getSelectedVal();
 		mortoArray[riga] = false;
-
 		for (int i = 0; i < numeroGiocatori; i++) {
 			PlayerPanel otherpanel = panelArray[i];
 			CompositeRow otherrow = otherpanel.rowArray[riga];
@@ -102,7 +93,6 @@ public class DartMain extends JFrame {
 		for (int i = 0; i < numeroGiocatori; i++) {
 			PlayerPanel otherpanel = panelArray[i];
 			CompositeRow otherrow = otherpanel.rowArray[riga];
-
 			ExtJLabel lblNumeroA = otherrow.lblNumeroA;
 			lblNumeroA.setLblMorto(true);
 			ExtJLabel lblNumeroB = otherrow.lblNumeroB;
@@ -116,11 +106,9 @@ public class DartMain extends JFrame {
 		int numeroGiocatori = intestazionepanel.getSelectedVal();
 		boolean morto = true;
 		for (int i = 0; i < numeroGiocatori; i++) {
-
 			PlayerPanel otherpanel = panelArray[i];
 			CompositeRow otherrow = otherpanel.rowArray[riga];
 			morto = morto & otherrow.pnlChiuso;
-
 		}
 		return morto;
 	}
@@ -131,17 +119,6 @@ public class DartMain extends JFrame {
 	public static void vincitore (){
 		int numeroGiocatori = intestazionepanel.getSelectedVal();
 		for (int i = 0; i < numeroGiocatori; i++) {
-//			if (i != pannello) {
-//				PlayerPanel otherpanel = panelArray[i];
-//				CompositeRow otherrow = otherpanel.rowArray[riga];
-//				morto = morto & otherrow.pnlChiuso;
-//				if (!otherrow.pnlChiuso) {
-//					int totale = Integer.parseInt(otherpanel.lblPunteggioPlayer
-//							.getText().toString()) + riga + delta;
-//					otherpanel.lblPunteggioPlayer.setText("" + totale);
-//				}
-//
-//			}
 		}
 	}
 
@@ -157,19 +134,7 @@ public class DartMain extends JFrame {
 			pnlPlayer = new PlayerPanel(i);
 			pnlPlayer.setBounds((width + 5) * i, 5, width, height);
 			pnlPlayer.setLayout(null);
-//			if (giocatoriArray[i]!=null) {
-//				if (giocatoriArray[i].getNome()!="") {
-//					giocatoriArray[i]=giocatoriArray[i];	
-//					pnlPlayer.txtName.setText(giocatoriArray[i].getNome());
-//				}
-//				
-//				
-//			} else {
-//				giocatoriArray[i]=new Giocatore("");
-//			}
-			
 			panelArray[i] = pnlPlayer;
-			//contentPanePlayer.setBackground(new Color(255,0,0));
 			contentPanePlayer.add(pnlPlayer);
 		}
 	}
@@ -179,11 +144,8 @@ public class DartMain extends JFrame {
 	 */
 	public DartMain() {
 		setResizable(false);
-
-		// imposto la window del programma
 		setTitle("Darts");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		setBounds(300, 300, 800, 600);
 		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 		int larghezzaMonitor = gd.getDisplayMode().getWidth();
 		int altezzaMonitor = gd.getDisplayMode().getHeight();
@@ -207,7 +169,6 @@ public class DartMain extends JFrame {
 		intestazionepanel.setBounds(124, 0, 550, 47);
 		contentPane.add(intestazionepanel);
 		int numeroGiocatori = intestazionepanel.getSelectedVal();
-		giocatoriArray= new Giocatore[numeroGiocatori];
 
 		contentPanePlayer = new JPanel();
 		contentPanePlayer.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -216,7 +177,5 @@ public class DartMain extends JFrame {
 		contentPane.add(contentPanePlayer);
 
 		buildIt(numeroGiocatori);
-
 	}
-
 }
